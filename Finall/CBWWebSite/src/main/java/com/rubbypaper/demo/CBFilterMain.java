@@ -4,6 +4,8 @@ import com.madgag.gif.fmsware.AnimatedGifEncoder;
 import com.madgag.gif.fmsware.GifDecoder;
 import com.rubbypaper.demo.CBFilterSimulation.ColorBlindType;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import javax.imageio.ImageIO;
 
 import org.springframework.stereotype.Controller;
@@ -24,69 +26,78 @@ public class CBFilterMain {
     static int colorBlindTypeIndex ; 
     
 	@PostMapping("/filter")
-	public String Methodnum()
-	{
-		String str = "";
+	public String Methodnum(HttpServletRequest request)
+	{	
+		String tes = "";
 		int type = 0;
 		
-		imagePath = str;        
-       colorBlindTypeIndex = type; 
-		return imagePath + "";
+		//이미지 파일 값을 받는 곳
+		imagePath = tes;   
+		
+		//적색맹,녹색맹,청색맹 선택한 값 받아 오는 곳
+       colorBlindTypeIndex = Integer.parseInt(request.getParameter("Colorblindnesstype")); 
+       
+       
+
+       // 입력된 색맹 유형에 해당하는 열거형 상수를 얻습니다.
+       ColorBlindType colorBlindType = getColorBlindTypeByIndex(colorBlindTypeIndex);
+
+       try {
+           // 이미지 파일을 읽어옵니다.
+           File imageFile = new File(imagePath);
+
+           // GIF 파일인지 확인
+           if (imageFile.getName().toLowerCase().endsWith(".gif")) {
+               // GIF 파일 디코딩
+               GifDecoder decoder = new GifDecoder();
+               decoder.read(new FileInputStream(imageFile));
+
+               List<BufferedImage> frames = new ArrayList<>();
+
+               for (int i = 0; i < decoder.getFrameCount(); i++) {
+                   BufferedImage frame = decoder.getFrame(i);
+                   BufferedImage simulatedFrame = CBFilterSimulation.simulateColorBlindness(frame, colorBlindType);
+                   frames.add(simulatedFrame);
+               }
+
+               // 새로운 GIF 이미지 생성
+               String outputImagePath = "src/main/resources/webapp/resouces/img/convert" + imageFile.getName();
+               createGifFromFrames(frames, outputImagePath);
+
+               System.out.println("GIF 이미지 변환이 완료되었습니다.");
+           } else {
+               // GIF가 아닌 경우 일반 이미지 변환
+               BufferedImage originalImage = ImageIO.read(imageFile);
+
+               // 색맹 시뮬레이션을 적용한 이미지 생성
+               BufferedImage simulatedImage = CBFilterSimulation.simulateColorBlindness(originalImage, colorBlindType);
+
+               // 이미지 저장
+               String outputImagePath = "src/main/resources/webapp/resources/img/convert" + imageFile.getName();
+               ImageIO.write(simulatedImage, "png", new File(outputImagePath));
+
+               System.out.println("이미지 변환이 완료되었습니다.");
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       
+       //* 해결 해야 하는 부분 : 밑에 ColorblindType 부분과 createGifFromFrames 부분을 이 메소드에다가 집어 넣기*
+       
+       if(1 == colorBlindTypeIndex)
+       {
+    	   System.out.println("=========값 받아 오기 성공 ====");
+    	  return ColorBlindType.PROTANOPIA;
+       }
+	return colorBlindType + "index";
+		
 	}
-    public static void main(String[] args) {      
-	
-        
-
-        // 입력된 색맹 유형에 해당하는 열거형 상수를 얻습니다.
-        ColorBlindType colorBlindType = getColorBlindTypeByIndex(colorBlindTypeIndex);
-
-        try {
-            // 이미지 파일을 읽어옵니다.
-            File imageFile = new File(imagePath);
-
-            // GIF 파일인지 확인
-            if (imageFile.getName().toLowerCase().endsWith(".gif")) {
-                // GIF 파일 디코딩
-                GifDecoder decoder = new GifDecoder();
-                decoder.read(new FileInputStream(imageFile));
-
-                List<BufferedImage> frames = new ArrayList<>();
-
-                for (int i = 0; i < decoder.getFrameCount(); i++) {
-                    BufferedImage frame = decoder.getFrame(i);
-                    BufferedImage simulatedFrame = CBFilterSimulation.simulateColorBlindness(frame, colorBlindType);
-                    frames.add(simulatedFrame);
-                }
-
-                // 새로운 GIF 이미지 생성
-                String outputImagePath = "src/main/resources/webapp/resouces/img/convert" + imageFile.getName();
-                createGifFromFrames(frames, outputImagePath);
-
-                System.out.println("GIF 이미지 변환이 완료되었습니다.");
-            } else {
-                // GIF가 아닌 경우 일반 이미지 변환
-                BufferedImage originalImage = ImageIO.read(imageFile);
-
-                // 색맹 시뮬레이션을 적용한 이미지 생성
-                BufferedImage simulatedImage = CBFilterSimulation.simulateColorBlindness(originalImage, colorBlindType);
-
-                // 이미지 저장
-                String outputImagePath = "src/main/resources/webapp/resouces/img/convert" + imageFile.getName();
-                ImageIO.write(simulatedImage, "png", new File(outputImagePath));
-
-                System.out.println("이미지 변환이 완료되었습니다.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        
-    }
+  
 
     // 숫자로 입력된 색맹 유형을 열거형 상수로 변환
     private static ColorBlindType getColorBlindTypeByIndex(int index) {
         switch (index) {
-            case 1:
+            case 1:            	
                 return ColorBlindType.PROTANOPIA; //적색맹
             case 2:
                 return ColorBlindType.DEUTERANOPIA; //녹색맹
