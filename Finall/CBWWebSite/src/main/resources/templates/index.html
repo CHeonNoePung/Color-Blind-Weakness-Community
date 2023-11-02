@@ -65,13 +65,13 @@
                     <div class="fileuploadcontainer">
                         <div class="image-upload" id="image-upload">
                 
-                            <form class="container" action="/filter"  method="post" enctype="multipart/form-data">
+                            <form class="container" th:action="@{/filter}"  method="post" enctype="multipart/form-data">
                                 <div class="button">
                                     <label for="chooseFile">
                                         파일선택
                                     </label>
                                 </div>
-                                <input type="file" accept="image/*.png,.jpg,.gif" id="chooseFile" name="chooseFile" onchange="loadFile(this)">
+                                <input type="file" accept="image/*,.png,.jpg,.gif" id="chooseFile" name="chooseFile" onchange="loadFile(this)">
                                 <!--이미지 선택하는 기능으로 accept=".png,.jpg,.gif"부분이 .png,.jpg,.gif들 확장자만 파일 선택가능하게 해줍니다.-->
                           
                 

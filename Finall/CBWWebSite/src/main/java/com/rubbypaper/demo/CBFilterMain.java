@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,21 +26,23 @@ import java.util.Scanner;
 public class CBFilterMain {
 	
     static String imagePath ;        
-    static int colorBlindTypeIndex ; 
+    static int colorBlindTypeIndex ;
+    
+    @Value("${file.upload.directory}")
+    private String sfilePath;
     
 	@PostMapping("/filter")
-	public String Methodnum(HttpServletRequest request)
-	{	
-		String tes = "";
-		int type = 0;
-		
+	public String Methodnum(HttpServletRequest request, @RequestParam("chooseFile") MultipartFile chooseFile)
+	{					
+		String imgName = chooseFile.getOriginalFilename();		
+		 
+		 
 		//이미지 파일 값을 받는 곳
-		imagePath = tes;   
+		imagePath = sfilePath + imgName;   
 		
 		//적색맹,녹색맹,청색맹 선택한 값 받아 오는 곳
-       colorBlindTypeIndex = Integer.parseInt(request.getParameter("Colorblindnesstype")); 
-       
-       
+       colorBlindTypeIndex = Integer.parseInt(request.getParameter("Colorblindnesstype"));  
+      
 
        // 입력된 색맹 유형에 해당하는 열거형 상수를 얻습니다.
        ColorBlindType colorBlindType = getColorBlindTypeByIndex(colorBlindTypeIndex);
@@ -84,12 +89,8 @@ public class CBFilterMain {
        
        //* 해결 해야 하는 부분 : 밑에 ColorblindType 부분과 createGifFromFrames 부분을 이 메소드에다가 집어 넣기*
        
-       if(1 == colorBlindTypeIndex)
-       {
-    	   System.out.println("=========값 받아 오기 성공 ====");
-    	  return ColorBlindType.PROTANOPIA;
-       }
-	return colorBlindType + "index";
+     
+	return "redirect:/";
 		
 	}
   
