@@ -21,4 +21,9 @@ public class MainController {
 	{
 		return "about";
 	}
+	
+	@RequestMapping("/alert")
+	public String alert() {
+		return "alert";
+	}
 }

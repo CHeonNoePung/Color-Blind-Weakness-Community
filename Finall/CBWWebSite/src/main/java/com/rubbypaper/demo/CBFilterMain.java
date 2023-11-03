@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -101,8 +103,10 @@ public class CBFilterMain {
                System.out.println("이미지 변환이 완료되었습니다.");
            }
            //다른 유형의 파일 업로드시 경고 창
-           else {        
-        	   return "alert";
+           else {
+        	  request.setAttribute("msg", "지원하지 않는 종류의 파일입니다.");
+        	  request.setAttribute("url", "redirect:/");
+        	   return "/alert";
            }
        } catch (IOException e) {
            e.printStackTrace();
