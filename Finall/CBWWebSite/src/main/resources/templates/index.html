@@ -15,9 +15,6 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/bootstrap/css/styles.css" rel="stylesheet" />
-        <script type="text/javascript">
-			<!-- 뭔 기능 넣지-->
-		</script>
     </head>
     <body>
         <!-- Navigation-->
@@ -64,35 +61,38 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="fileuploadcontainer">
                         <div class="image-upload" id="image-upload">
-                
-                            <form class="container" th:action="@{/filter}"  method="post" enctype="multipart/form-data">
+                	
+                            <form class="container" th:action="@{/filter}"  method="post" enctype="multipart/form-data" onchange="loadFile(this)">
                                 <div class="button">
                                     <label for="chooseFile">
                                         파일선택
                                     </label>
                                 </div>
-                                <input type="file" accept="image/*,.png,.jpg,.gif" id="chooseFile" name="chooseFile" onchange="loadFile(this)">
+                                <input type="file" class="real-upload" accept="image/*,.png,.jpg,.gif" id="chooseFile" name="chooseFile" onchange="loadFile(this)">
                                 <!--이미지 선택하는 기능으로 accept=".png,.jpg,.gif"부분이 .png,.jpg,.gif들 확장자만 파일 선택가능하게 해줍니다.-->
                           
-                
-                            <div class="fileContainer">
-                                <div class="fileInput"> <!--파일 이름 보여주는 태그입니다.-->
-                                    <p>FILE NAME: </p>
-                                    <p id="fileName"></p>
-                                </div>
+                					
+                            	<div class="fileContainer">
+                                	<div class="fileInput"> <!--파일 이름 보여주는 태그입니다.-->
+                                    	<p>FILE NAME: </p>
+                                    	<p id="fileName"></p>
+                                	</div>
                                                 
                                 <select name="Colorblindnesstype" id="Colorblindnesstype"> <!--색맹 선택-->
-                                <option value="1">적색맹</option>
-                                <option value="2">녹색맹</option>
-                                <option value="3">청색맹</option>
+                                	<option value="1">적색맹</option>
+                                	<option value="2">녹색맹</option>
+                                	<option value="3">청색맹</option>
                                 </select>
                                  <!--업로드한 사진 보이게하는 버튼입니다.-->
                                    <button type="submit" class="buttonContainer" id="submitButton">SUBMIT</button>                             
-                            </div>
-                            </form>
-                        </div>
-                        
-                        <div class="image-show" id="image-show"></div> <!--버튼 누르면 여기서 사진이 나옵니다.-->
+                            	</div>                  
+                       
+                     
+                        		<div class="image-show" id="image-show">
+									<img src="resouces/img/convert/*">
+								</div>
+							   </form>
+						 </div><!--버튼 누르면 여기서 사진이 나옵니다.-->
                     </div>
                 </div>
             </div>
