@@ -104,8 +104,8 @@ public class CBFilterMain {
            }
            //다른 유형의 파일 업로드시 경고 창
            else {
-        	  request.setAttribute("msg", "지원하지 않는 종류의 파일입니다.");
-        	  request.setAttribute("url", "redirect:/");
+        	//  request.setAttribute("msg", "지원하지 않는 종류의 파일입니다.");
+        	 // request.setAttribute("url", "redirect:/");
         	   return "/alert";
            }
        } catch (IOException e) {
