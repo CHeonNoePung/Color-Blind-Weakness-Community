@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script>	
+	function winopen(img)
+	{
+		var image = new Image();
+		image.src=img;
+		window.open(img,"","width=" + image.width+",height="+image.height);
+		location.href = "home";
+	}
+</script>
+</head>
+
+	<body>
+		<a href="javascript:winopen('${imagepath}')"><img th:src="${imagepath}" width="100" height="100"></a>
+	</body>
+</html>
+	

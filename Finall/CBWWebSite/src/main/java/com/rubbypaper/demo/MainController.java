@@ -26,4 +26,10 @@ public class MainController {
 	public String alert() {
 		return "alert";
 	}
+	
+	@RequestMapping("/window")
+	public String window() {
+		return "window";
+	}
+
 }
