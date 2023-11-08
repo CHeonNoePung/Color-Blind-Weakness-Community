@@ -16,6 +16,9 @@
 2-2. 이미지 출력 관련 코드 2
 : https://gilssang97.tistory.com/43
 
+2-3 . 이미지 출력 관련 코드 3
+: https://doitdoik.tistory.com/34
+
 3. javascript hide 관련 명령어
 - https://yian.tistory.com/26
 - https://wecanit.tistory.com/18
