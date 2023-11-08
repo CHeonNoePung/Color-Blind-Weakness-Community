@@ -102,10 +102,6 @@ public class CBFilterMain {
                createGifFromFrames(frames, outputImagePath);
 
                System.out.println("GIF 이미지 변환이 완료되었습니다.");
-               
-             
-              // return "/window";
-               
            } else if(imageFile.getName().toLowerCase().endsWith(".jpg") || imageFile.getName().toLowerCase().endsWith(".png")) {
                // GIF가 아닌 경우 일반 이미지 변환
                BufferedImage originalImage = ImageIO.read(imageFile);
@@ -120,7 +116,7 @@ public class CBFilterMain {
 
                System.out.println("이미지 변환이 완료되었습니다.");
                
-             // return "/window";
+            
                
            }
            //다른 유형의 파일 업로드시 경고 창
