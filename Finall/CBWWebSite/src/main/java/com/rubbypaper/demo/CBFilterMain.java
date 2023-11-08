@@ -98,13 +98,13 @@ public class CBFilterMain {
                }
 
                // 새로운 GIF 이미지 생성
-               String outputImagePath = "src/main/webapp/resources/img/convert/" + imageFile.getName();
+               String outputImagePath = "src/main/resources/static/img/convert/" + imageFile.getName();
                createGifFromFrames(frames, outputImagePath);
 
                System.out.println("GIF 이미지 변환이 완료되었습니다.");
                
-               model.addAttribute("imgpath",outputImagePath);
-               return "/window";
+             
+              // return "/window";
                
            } else if(imageFile.getName().toLowerCase().endsWith(".jpg") || imageFile.getName().toLowerCase().endsWith(".png")) {
                // GIF가 아닌 경우 일반 이미지 변환
@@ -115,12 +115,12 @@ public class CBFilterMain {
 
                // 이미지 저장
             //   Files.copy(chooseFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
-              String outputImagePath = "src/main/webapp/resources/img/convert/" + imageFile.getName();
+              String outputImagePath = "src/main/resources/static/img/convert/" + imageFile.getName();
                ImageIO.write(simulatedImage, "png", new File(outputImagePath));
 
                System.out.println("이미지 변환이 완료되었습니다.");
                
-               return "/window";
+             // return "/window";
                
            }
            //다른 유형의 파일 업로드시 경고 창
@@ -134,7 +134,7 @@ public class CBFilterMain {
           
        }
        
-       //* 해결 해야 하는 부분 : 밑에 ColorblindType 부분과 createGifFromFrames 부분을 이 메소드에다가 집어 넣기*
+       
        
      
 	return "redirect:/";
