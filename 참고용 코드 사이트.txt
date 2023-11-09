@@ -32,13 +32,9 @@
 5. select option 관련 명령어
 - https://memory-develo.tistory.com/146
 
+6. javascript window.open() 관련 예제
+- https://milkye.tistory.com/352
 
-
-웹 페이지에서 파일 업로드 한 것을 필터 알고리즘을 통해 변환 후 변환 한 이미지를 페이지에 보여주게 하기
-
-1. 파일 경로와 색맹 타입 값을 알고리즘 쪽으로 넘겨주기
-2. 변환이 성공적으로 됐으면 이 이미지가 경로 설정한 쪽으로 저장됨
-3. 저장된 이미지를 index.html로 불러오기
 
 
 
