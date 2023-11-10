@@ -1,14 +1,12 @@
 <script language="JavaScript">		  		
 		 var url = "home";
-		 var fileurl = "/img/convert/스크린샷(1).png"	<!-- 경로 뒤에 파일 이름만 가져오면 되는데 하 참-->
+		 var fileurl = "/img/convert/테스트.gif"	<!-- 경로 뒤에 파일 이름만 가져오면 되는데 하 참-->
 		 var img = new Image();
 		 
-		 var img_width = img.width;
-		 var win_width =img.width+1300;
-		 var height= img.height+700;
+		 var img_width = img.width;	
+		 var height= img.height;
 		 	
-    	var OpenWindow =  window.open("", "_blank", "width="+img_width+ ",height="+height+",menubars=no,scrollbars=no");
-    	OpenWindow.document.write("'<img src='"+fileurl+"'width='"+win_width+"'height='"+height+"'>'");
-    	 
+    	var OpenWindow =  window.open(fileurl, "", "width="+img_width+ ",height="+height+",menubars=no,scrollbars=no ,toolbar=no,status=no, top=0,left=0");
+    	OpenWindow.document;    	 
   		location.href = url;
 </script>

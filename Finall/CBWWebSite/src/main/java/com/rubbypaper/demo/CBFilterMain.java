@@ -3,6 +3,7 @@ package com.rubbypaper.demo;
 import com.madgag.gif.fmsware.AnimatedGifEncoder;
 import com.madgag.gif.fmsware.GifDecoder;
 import com.rubbypaper.demo.CBFilterSimulation.ColorBlindType;
+import com.rubbypaper.file.FileDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,10 +44,13 @@ public class CBFilterMain {
     private String sfilePath;
     
 	@PostMapping("/filter")
-	public String Methodnum(HttpServletRequest request, @RequestParam("chooseFile") MultipartFile chooseFile,Model model)
+	public String Methodnum(HttpServletRequest request, @RequestParam("chooseFile") MultipartFile chooseFile,RedirectAttributes redirectAttributes)
 	{					
 		//파일 이름 가져오는 부분
 		String imgName = chooseFile.getOriginalFilename();
+		
+		
+		
 		
         
 		
@@ -119,8 +124,15 @@ public class CBFilterMain {
 
                System.out.println("이미지 변환이 완료되었습니다.");
                
-               return "/window";
-            
+               if(imageFile != null)
+               {
+            	   System.out.println("파일을 찾을수가 없습니다.");
+            	   return "redirect:/";
+               }
+               else {
+               redirectAttributes.addAttribute("image", imgName);
+               return "redirect:/img/convert/{image}";
+               }
                
            }
            //다른 유형의 파일 업로드시 경고 창
