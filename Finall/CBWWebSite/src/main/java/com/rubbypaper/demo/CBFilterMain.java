@@ -48,20 +48,14 @@ public class CBFilterMain {
 	{					
 		//파일 이름 가져오는 부분
 		String imgName = chooseFile.getOriginalFilename();
-		
-		
-		
-		
         
-		
+
 		 //String rootPath = request.getSession().getServletContext().getRealPath("/");
 		 //String fullPath= rootPath+sfilePath;
 		 
 		
 		//이미지 파일 값을 받는 곳
 		imagePath = sfilePath + imgName;   
-		
-		
 		
 		//적색맹,녹색맹,청색맹 선택한 값 받아 오는 곳
        colorBlindTypeIndex = Integer.parseInt(request.getParameter("Colorblindnesstype"));  
@@ -83,10 +77,8 @@ public class CBFilterMain {
            //권환 설정 확인
            //System.out.println("읽기 권환 학인하기 : " + imageFile.canRead());
            //System.out.println("쓰기 권환 학인하기 : " + imageFile.canWrite());
-           //System.out.println("파일 존재 여부 확인 : " + imageFile.exists());
-         
+           //System.out.println("파일 존재 여부 확인 : " + imageFile.exists());      
                       
-           //Path copyOfLocation = Paths.get(sfilePath + File.separator + StringUtils.cleanPath(imgName));
            
            // GIF 파일인지 확인
            if (imageFile.getName().toLowerCase().endsWith(".gif")) {
@@ -108,7 +100,9 @@ public class CBFilterMain {
 
                System.out.println("GIF 이미지 변환이 완료되었습니다.");
                
-               return "/window";
+               //변환된 사진 출력 (단,convert 눌렀을 시 바로 이미지 변환 후 저장되는게 아니라서 바로는 못 찾음)
+               return "redirect:/img/convert/{imageName}";
+              // return "/window";
                
            } else if(imageFile.getName().toLowerCase().endsWith(".jpg") || imageFile.getName().toLowerCase().endsWith(".png")) {
                // GIF가 아닌 경우 일반 이미지 변환
@@ -124,15 +118,15 @@ public class CBFilterMain {
 
                System.out.println("이미지 변환이 완료되었습니다.");
                
-               if(imageFile != null)
-               {
-            	   System.out.println("파일을 찾을수가 없습니다.");
-            	   return "redirect:/";
-               }
-               else {
-               redirectAttributes.addAttribute("image", imgName);
-               return "redirect:/img/convert/{image}";
-               }
+       
+               redirectAttributes.addAttribute("imageName", imgName);
+               System.out.println("이미지 아웃풋 출력 : " + outputImagePath);
+               
+               
+               //변환된 사진 출력 (단,convert 눌렀을 시 바로 이미지 변환 후 저장되는게 아니라서 바로는 못 찾음)
+                return "redirect:/img/convert/{imageName}";
+             //  return "redirect:/window";
+           	
                
            }
            //다른 유형의 파일 업로드시 경고 창

@@ -22,7 +22,7 @@ public class MainController {
 		return "about";
 	}
 	
-	@RequestMapping("/alert")
+	@RequestMapping("/alert") // 지정된 확장자 및 조건외에 요청이 들어오면 "alert.html"로 보내는 코드
 	public String alert() {
 		return "alert";
 	}
