@@ -35,6 +35,9 @@
 6. javascript window.open() 관련 예제
 - https://milkye.tistory.com/352
 
+7. spring redirect 관련 내용
+- https://taehoung0102.tistory.com/181
+
 
 
 
