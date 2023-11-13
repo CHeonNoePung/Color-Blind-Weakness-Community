@@ -3,7 +3,6 @@ package com.rubbypaper.demo;
 import com.madgag.gif.fmsware.AnimatedGifEncoder;
 import com.madgag.gif.fmsware.GifDecoder;
 import com.rubbypaper.demo.CBFilterSimulation.ColorBlindType;
-import com.rubbypaper.file.FileDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -48,11 +47,8 @@ public class CBFilterMain {
 	{					
 		//파일 이름 가져오는 부분
 		String imgName = chooseFile.getOriginalFilename();
-        
+		redirectAttributes.addAttribute("imageName", imgName);
 
-		 //String rootPath = request.getSession().getServletContext().getRealPath("/");
-		 //String fullPath= rootPath+sfilePath;
-		 
 		
 		//이미지 파일 값을 받는 곳
 		imagePath = sfilePath + imgName;   
@@ -102,7 +98,7 @@ public class CBFilterMain {
                
                //변환된 사진 출력 (단,convert 눌렀을 시 바로 이미지 변환 후 저장되는게 아니라서 바로는 못 찾음)
                return "redirect:/img/convert/{imageName}";
-              // return "/window";
+           
                
            } else if(imageFile.getName().toLowerCase().endsWith(".jpg") || imageFile.getName().toLowerCase().endsWith(".png")) {
                // GIF가 아닌 경우 일반 이미지 변환
@@ -111,21 +107,17 @@ public class CBFilterMain {
                // 색맹 시뮬레이션을 적용한 이미지 생성
                BufferedImage simulatedImage = CBFilterSimulation.simulateColorBlindness(originalImage, colorBlindType);
 
-               // 이미지 저장
-            //   Files.copy(chooseFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
+               // 이미지 저장           
               String outputImagePath = "src/main/resources/static/img/convert/" + imageFile.getName();
-               ImageIO.write(simulatedImage, "png", new File(outputImagePath));
+              ImageIO.write(simulatedImage, "png", new File(outputImagePath));
 
-               System.out.println("이미지 변환이 완료되었습니다.");
-               
-       
-               redirectAttributes.addAttribute("imageName", imgName);
+               System.out.println("이미지 변환이 완료되었습니다.");   
                System.out.println("이미지 아웃풋 출력 : " + outputImagePath);
                
                
                //변환된 사진 출력 (단,convert 눌렀을 시 바로 이미지 변환 후 저장되는게 아니라서 바로는 못 찾음)
                 return "redirect:/img/convert/{imageName}";
-             //  return "redirect:/window";
+             
            	
                
            }
@@ -139,11 +131,7 @@ public class CBFilterMain {
           
        }
        
-       
-       
-     
 	return "redirect:/";
-		
 	}
 	
 
