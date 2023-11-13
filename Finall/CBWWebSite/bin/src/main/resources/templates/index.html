@@ -65,16 +65,13 @@
                     <div class="fileuploadcontainer">
                         <div class="image-upload" id="image-upload">
                 
-                            <form class="container" action="/filter"  method="post" enctype="multipart/form-data">
+                            <form class="container" th:action="@{/filter}"  method="post" enctype="multipart/form-data">
                                 <div class="button">
                                     <label for="chooseFile">
                                         파일선택
                                     </label>
                                 </div>
-
-
-
-                                <input type="file" accept="image/*.png,.jpg,.gif" id="chooseFile" name="chooseFile" onchange="loadFile(this)">
+                                <input type="file" accept="image/*,.png,.jpg,.gif" id="chooseFile" name="chooseFile" onchange="loadFile(this)">
                                 <!--이미지 선택하는 기능으로 accept=".png,.jpg,.gif"부분이 .png,.jpg,.gif들 확장자만 파일 선택가능하게 해줍니다.-->
                           
                 
@@ -85,13 +82,12 @@
                                 </div>
                                                 
                                 <select name="Colorblindnesstype" id="Colorblindnesstype"> <!--색맹 선택-->
-                                <option value="PROTANOPIA">적색맹</option>
-                                <option value="DEUTERANOPIA">녹색맹</option>
-                                <option value="TRITANOPIA">청색맹</option>
+                                <option value="1">적색맹</option>
+                                <option value="2">녹색맹</option>
+                                <option value="3">청색맹</option>
                                 </select>
-                                <div class="buttonContainer"> <!--업로드한 사진 보이게하는 버튼입니다.-->
-                                    <button type="submit" class="submitButton" id="submitButton">SUBMIT</button>
-                                </div>
+                                 <!--업로드한 사진 보이게하는 버튼입니다.-->
+                                   <button type="submit" class="buttonContainer" id="submitButton">SUBMIT</button>                             
                             </div>
                             </form>
                         </div>

@@ -1,2 +1,0 @@
-spring.thymeleaf.prefix=classpath:/templates/thymeleaf/ 
-server.port = 8024

@@ -11,9 +11,9 @@ public class CBFilterSimulation {
         { -0.2263, 1.1653, 0.0457 },
         { 0.0000, 0.0497, 0.9735 }
     };
-    private static final double PROTONOPIA_ALPHA = 0.0;
-    private static final double DEUTERANOPIA_ALPHA = 0.7;
-    private static final double TRITANOPIA_ALPHA = 0.5;
+    private static final double PROTONOPIA_ALPHA = 0.1;
+    private static final double DEUTERANOPIA_ALPHA = 0.8;
+    private static final double TRITANOPIA_ALPHA = 0.4;
 
     // Gamma 보정값
     private static final double GAMMA = 2.2;	
